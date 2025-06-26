@@ -10,6 +10,7 @@
   wayland,
   wayland-protocols,
   wayland-scanner,
+  xorg,
   libGL,
   libxkbcommon,
   apple-sdk,
@@ -40,15 +41,19 @@ stdenv.mkDerivation {
       zlib
       openexr
     ]
-    ++ lib.optional stdenv.hostPlatform.isLinux [
+    ++ lib.optionals stdenv.hostPlatform.isLinux [
       pkg-config
       wayland
       wayland-protocols
       wayland-scanner
+	  xorg.libX11
+	  xorg.libXrandr
+	  xorg.libXinerama
+	  xorg.libXi
+	  libGL
       libxkbcommon
-      libGL
     ]
-    ++ lib.optional stdenv.hostPlatform.isDarwin [
+    ++ lib.optionals stdenv.hostPlatform.isDarwin [
       apple-sdk
     ];
 
