@@ -25,10 +25,11 @@
         let
           pkgs = import nixpkgs {
             inherit system;
+            config.allowUnfree = true;
           };
         in
         {
-          "${system}".default = pkgs.callPackage ./nix { };
+          "${system}".default = pkgs.callPackage ./nix { cudaSupport = true; };
         }
       );
 
